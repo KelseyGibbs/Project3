@@ -11,9 +11,16 @@ class Login extends Component {
       email: "",
       password: "",
       errors: {},
-      admin: "",
+      isAdmin: true
     };
+    this.handleToggle = this.handleToggle.bind(this);
   }
+
+  handleToggle() {
+		this.setState(function(prevState) {
+			return {isAdmin: !prevState.isAdmin};
+		});
+	}
 
   componentDidMount() {
     // If logged in and user navigates to Login page, should redirect them to dashboard
@@ -23,8 +30,11 @@ class Login extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.auth.isAuthenticated) {
-      this.props.history.push("/dashboard");
+    if (nextProps.auth.isAuthenticated && this.state.isAdmin === true) {
+      this.props.history.push("/AdminDash");
+    }
+    if (nextProps.auth.isAuthenticated && this.state.isAdmin === false) {
+      this.props.history.push("/Dashboard");
     }
 
     if (nextProps.errors) {
@@ -43,7 +53,8 @@ class Login extends Component {
 
     const userData = {
       email: this.state.email,
-      password: this.state.password
+      password: this.state.password,
+      isAdmin: this.state.isAdmin
     };
 
     this.props.loginUser(userData);
@@ -100,11 +111,15 @@ class Login extends Component {
                 </span>
               </div>
               <div className="col s12">
-              <div class="switch">
+              <div className="switch">
+              <p>Admin?</p>
                 <label>
                   true
-                  <input type="checkbox"></input>
-                  <span class="lever"></span>
+                  <input 
+                  type="checkbox"
+                  onClick={this.handleToggle}
+                  ></input>
+                  <span className="lever">{this.state.isAdmin ? 'true' : 'false'}</span>
                   false
                 </label>
               </div>

@@ -6,25 +6,24 @@ import { registerUser } from "../../actions/authActions";
 import classnames from "classnames";
 
 class Register extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       name: "",
       email: "",
       password: "",
       password2: "",
       errors: {},
-      admin: ""
-
+      isAdmin: true
     };
+    this.handleToggle = this.handleToggle.bind(this);
   }
 
-  componentDidMount() {
-    // If logged in and user navigates to Register page, should redirect them to dashboard
-    if (this.props.auth.isAuthenticated) {
-      this.props.history.push("/dashboard");
-    }
-  }
+  handleToggle() {
+		this.setState(function(prevState) {
+			return {isAdmin: !prevState.isAdmin};
+		});
+	}
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
@@ -46,7 +45,7 @@ class Register extends Component {
       email: this.state.email,
       password: this.state.password,
       password2: this.state.password2,
-      admin: this.state.admin
+      isAdmin: this.state.isAdmin
     };
 
     this.props.registerUser(newUser, this.props.history);
@@ -124,12 +123,16 @@ class Register extends Component {
                 <span className="red-text">{errors.password2}</span>
               </div>
               <div className="col s12" style={{ paddingLeft: "11.250px" }}>
-              <div class="switch">
+              <div className="switch">
+              <p>Admin?</p>
                 <label>
-                  Customer
-                  <input type="checkbox"></input>
-                  <span class="lever"></span>
-                  Admin
+                  true
+                  <input 
+                  type="checkbox"
+                  onClick={this.handleToggle}
+                  ></input>
+                  <span className="lever">{this.state.isAdmin ? 'true' : 'false'}</span>
+                  false
                 </label>
               </div>
                 <button
