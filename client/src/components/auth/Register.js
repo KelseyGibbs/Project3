@@ -13,7 +13,9 @@ class Register extends Component {
       email: "",
       password: "",
       password2: "",
-      errors: {}
+      errors: {},
+      admin: ""
+
     };
   }
 
@@ -43,7 +45,8 @@ class Register extends Component {
       name: this.state.name,
       email: this.state.email,
       password: this.state.password,
-      password2: this.state.password2
+      password2: this.state.password2,
+      admin: this.state.admin
     };
 
     this.props.registerUser(newUser, this.props.history);
@@ -55,11 +58,6 @@ class Register extends Component {
     return (
       <div className="container">
         <div className="row">
-          <div className="col s8 offset-s2">
-            <Link to="/" className="btn-flat waves-effect">
-              <i className="material-icons left">keyboard_backspace</i> Back to
-              home
-            </Link>
             <div className="col s12" style={{ paddingLeft: "11.250px" }}>
               <h4>
                 <b>Register</b> below
@@ -126,6 +124,14 @@ class Register extends Component {
                 <span className="red-text">{errors.password2}</span>
               </div>
               <div className="col s12" style={{ paddingLeft: "11.250px" }}>
+              <div class="switch">
+                <label>
+                  Customer
+                  <input type="checkbox"></input>
+                  <span class="lever"></span>
+                  Admin
+                </label>
+              </div>
                 <button
                   style={{
                     width: "150px",
@@ -134,7 +140,7 @@ class Register extends Component {
                     marginTop: "1rem"
                   }}
                   type="submit"
-                  className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+                  className="btn"
                 >
                   Sign up
                 </button>
@@ -142,7 +148,6 @@ class Register extends Component {
             </form>
           </div>
         </div>
-      </div>
     );
   }
 }

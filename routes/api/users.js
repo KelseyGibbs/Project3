@@ -30,7 +30,8 @@ router.post("/register", (req, res) => {
       const newUser = new User({
         name: req.body.name,
         email: req.body.email,
-        password: req.body.password
+        password: req.body.password,
+        isAdmin: req.body.isAdmin
       });
 
       // Hash password using bcrypt then save the hashed password
@@ -62,6 +63,7 @@ router.post("/login", (req, res) => {
   // Assign the user input to local variables
   const email = req.body.email;
   const password = req.body.password;
+  const isAdminn = req.body.isAdmin;
 
   // Find the user that matches the user input
   User.findOne({ email }).then(user => {
@@ -77,7 +79,8 @@ router.post("/login", (req, res) => {
         // Create JWT Payload
         const payload = {
           id: user.id,
-          name: user.name
+          name: user.name,
+          isAdmin: user.isAdmin
         };
 
         // Sign token

@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { loginUser } from "../../actions/authActions";
-import classnames from "classnames";
+// import PropTypes from "prop-types";
+// import { connect } from "react-redux";
+// import { loginUser } from "../../actions/authActions";
+// import classnames from "classnames";
 
 class AdminDash extends Component {
   constructor() {
@@ -15,7 +15,7 @@ class AdminDash extends Component {
   }
 
   render() {
-    const { errors } = this.state;
+    // const { errors } = this.state;
 
     return (
         <div className="container">

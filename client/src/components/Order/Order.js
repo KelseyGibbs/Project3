@@ -1,8 +1,10 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { loginUser } from "../../actions/authActions";
-import classnames from "classnames";
+// import PropTypes from "prop-types";
+// import { connect } from "react-redux";
+// import { loginUser } from "../../actions/authActions";
+// import classnames from "classnames";
+import Toast from "../Toast/Toast";
+import "./style.css";
 
 class Order extends Component {
   constructor() {
@@ -73,7 +75,7 @@ class Order extends Component {
           </div>
           <div class="card-reveal">
             <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-            <p>Here is some more information about this product that is only revealed once clicked on.</p>
+            <p>Here is some more information about this product that is only revealed once clicked on. Here is some more information about this product that is only revealed once clicked on.</p>
             </div>
           </div>
           </div>
@@ -125,6 +127,8 @@ class Order extends Component {
             </div>
           </div>
           </div>
+
+        <Toast></Toast>
         </div>
   
       </div>

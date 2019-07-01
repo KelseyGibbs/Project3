@@ -10,7 +10,8 @@ class Login extends Component {
     this.state = {
       email: "",
       password: "",
-      errors: {}
+      errors: {},
+      admin: "",
     };
   }
 
@@ -99,7 +100,21 @@ class Login extends Component {
                 </span>
               </div>
               <div className="col s12">
+              <div class="switch">
+                <label>
+                  true
+                  <input type="checkbox"></input>
+                  <span class="lever"></span>
+                  false
+                </label>
+              </div>
                 <button
+                  style={{
+                    width: "150px",
+                    borderRadius: "3px",
+                    letterSpacing: "1.5px",
+                    marginTop: "1rem"
+                  }}
                   type="submit"
                   className="btn"
                 >
