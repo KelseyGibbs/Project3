@@ -27,5 +27,9 @@
   "devDependencies": {},
   "author": "",
   "license": "ISC",
-  "browserslist": []
+  "browserslist": [],
+  "devServer": {
+    "compress": true,
+    "disableHostCheck": true   // That solved it
+ }      
 }
