@@ -19,16 +19,15 @@ app.use(passport.initialize());
 // Passport config
 require("./config/passport")(passport);
 
-// Serve up static assets
 if (process.env.NODE_ENV === 'production') {
 	app.use(express.static('client/build'));
 }
 
-// app.get('*', (request, response) => {
-// 	response.sendFile(path.join(__dirname, 'client/build', 'index.html'));
-// });
+app.get('*', (request, response) => {
+	response.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+});
 
-let MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/WholeBaker";
+  let MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/WholeBaker";
 
 mongoose.connect(MONGODB_URI, {
     useNewUrlParser: true
