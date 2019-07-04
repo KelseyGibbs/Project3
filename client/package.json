@@ -27,9 +27,5 @@
   "devDependencies": {},
   "author": "",
   "license": "ISC",
-  "browserslist": [],
-  "devServer": {
-    "compress": true,
-    "disableHostCheck": true
- }      
+  "browserslist": []
 }
