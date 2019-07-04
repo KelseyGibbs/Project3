@@ -1,60 +1,37 @@
 import React, { Component } from "react";
-// import PropTypes from "prop-types";
-// import { connect } from "react-redux";
-// import { loginUser } from "../../actions/authActions";
-// import classnames from "classnames";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { logoutUser } from "../../actions/authActions";
 import Toast from "../Toast/Toast";
 import "./style.css";
 
 class Order extends Component {
-  constructor() {
-    super();
-    this.state = {
-      email: "",
-      password: "",
-      errors: {}
-    };
-  }
-
-//   componentDidMount() {
-//     // If logged in and user navigates to Login page, should redirect them to dashboard
-//     if (this.props.auth.isAuthenticated) {
-//       this.props.history.push("/dashboard");
-//     }
-//   }
-
-//   componentWillReceiveProps(nextProps) {
-//     if (nextProps.auth.isAuthenticated) {
-//       this.props.history.push("/dashboard");
-//     }
-
-//     if (nextProps.errors) {
-//       this.setState({
-//         errors: nextProps.errors
-//       });
-//     }
-//   }
-
-//   onChange = e => {
-//     this.setState({ [e.target.id]: e.target.value });
-//   };
-
-//   onSubmit = e => {
-//     e.preventDefault();
-
-//     const userData = {
-//       email: this.state.email,
-//       password: this.state.password
-//     };
-
-//     this.props.loginUser(userData);
-//   };
+  onLogoutClick = e => {
+    e.preventDefault();
+    this.props.logoutUser();
+  };
 
   render() {
-    const { errors } = this.state;
+    const { user } = this.props.auth;
 
     return (
         <div className="container">
+                <div className="row">
+          <div className="col s12 center-align">
+            <h4>
+              <b>Hey there,</b> {user.name}
+              <p className="flow-text grey-text text-darken-1">
+                You are logged into <b>WholeBaker</b>
+              </p>
+            </h4>
+            <button
+              onClick={this.onLogoutClick}
+              className="btn"
+            >
+              Logout
+            </button>
+          </div>
+        </div>
         <div className="row">
           <div className="col s12">
             <h4>
@@ -66,7 +43,6 @@ class Order extends Component {
           <div className="col 3">
         <div class="card">
           <div class="card-image waves-effect waves-block waves-light">
-            <img class="activator" src="images/office.jpg"></img>
           </div>
           <div class="card-content">
             <span class="card-title activator grey-text text-darken-4">Card Title<i
@@ -82,7 +58,6 @@ class Order extends Component {
           <div className="col 3">
         <div class="card">
           <div class="card-image waves-effect waves-block waves-light">
-            <img class="activator" src="images/office.jpg"></img>
           </div>
           <div class="card-content">
             <span class="card-title activator grey-text text-darken-4">Card Title<i
@@ -98,7 +73,6 @@ class Order extends Component {
           <div className="col 3">
         <div class="card">
           <div class="card-image waves-effect waves-block waves-light">
-            <img class="activator" src="images/office.jpg"></img>
           </div>
           <div class="card-content">
             <span class="card-title activator grey-text text-darken-4">Card Title<i
@@ -114,7 +88,6 @@ class Order extends Component {
           <div className="col 3">
         <div class="card">
           <div class="card-image waves-effect waves-block waves-light">
-            <img class="activator" src="images/office.jpg"></img>
           </div>
           <div class="card-content">
             <span class="card-title activator grey-text text-darken-4">Card Title<i
@@ -130,18 +103,27 @@ class Order extends Component {
 
         <Toast></Toast>
         </div>
-  
+        <button
+              onClick={this.onLogoutClick}
+              className="btn"
+            >
+              Logout
+            </button>
       </div>
     );
   }
 }
-// Login.propTypes = {
-//   loginUser: PropTypes.func.isRequired,
-//   auth: PropTypes.object.isRequired,
-//   errors: PropTypes.object.isRequired
-// };
-// const mapStateToProps = state => ({
-//   auth: state.auth,
-//   errors: state.errors
-// });
-export default Order;
+
+Order.propTypes = {
+  logoutUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(
+  mapStateToProps,
+  { logoutUser }
+)(Order);

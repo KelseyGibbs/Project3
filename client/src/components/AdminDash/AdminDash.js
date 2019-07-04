@@ -30,24 +30,24 @@ class AdminDash extends Component {
               Logout
             </button>
             
-            <div class="row space">
-    <div class="col s4">
-      <div class="card-panel teal">
-        <span class="white-text">
+            <div className="row space">
+    <div className="col s4">
+      <div className="card-panel teal">
+        <span className="white-text">
         <a href="/register"><h3>Customers</h3></a>
         </span>
       </div>
     </div>
-    <div class="col s4">
-      <div class="card-panel teal">
-        <span class="white-text"> 
+    <div className="col s4">
+      <div className="card-panel teal">
+        <span className="white-text"> 
         <a href="/allproducts"><h3>Products</h3></a>
         </span>
       </div>
     </div>
-    <div class="col s4">
-      <div class="card-panel teal">
-        <span class="white-text"> 
+    <div className="col s4">
+      <div className="card-panel teal">
+        <span className="white-text"> 
         <a href="/Production"><h3>Production</h3></a>
         </span>
       </div>

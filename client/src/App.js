@@ -16,6 +16,7 @@ import AdminDash from "./components/AdminDash/AdminDash";
 import Order from "./components/Order/Order";
 import AllProducts from "./components/Products/AllProducts";
 import ProductTotals from "./components/Products/ProductTotals";
+import BooksContainer from "./components/BooksContainer";
 
 import "./App.css";
 // Check for token to keep user logged in
@@ -45,14 +46,15 @@ class App extends Component {
       <Router>
         <div className="App">
           <Route exact path="/" component={Landing} />
-          <Route exact path="/admindash" component={AdminDash} />          
+          <Route exact path="/books" component={BooksContainer} /> 
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
-          <Route exact path="/order" component={Order} />
           <Route exact path="/Allproducts" component={AllProducts} />
           <Route exact path="/production" component={ProductTotals} />
           <Switch>
             <PrivateRoute exact path="/dashboard" component={Dashboard} />
+            <PrivateRoute exact path="/order" component={Order} />
+            <PrivateRoute exact path="/admindash" component={AdminDash} />
           </Switch>
         </div>
       </Router>
