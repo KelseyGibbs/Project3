@@ -7,13 +7,15 @@ module.exports = function validateLoginInput(data) {
   // Convert empty fields to an empty string using the conditional operator "?" so we can use the validator npm functions
   data.email = !isEmpty(data.email) ? data.email : "";
   data.password = !isEmpty(data.password) ? data.password : "";
+  data.isAdmin;
+  data.cart;
 
   // Email checks
   if (Validator.isEmpty(data.email)) {
     errors.email = "Email field is required";
   } else if (!Validator.isEmail(data.email)) {
     errors.email = "Email is invalid";
-  }
+  } 
   
   // Password checks
   if (Validator.isEmpty(data.password)) {

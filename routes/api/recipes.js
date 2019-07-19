@@ -1,21 +1,16 @@
 const router = require("express").Router();
-const recipesController = require("../../controllers/recipescontroller");
+const recipesController = require("../../controllers/recipesController");
 
-// Matches with "/api/books"
+// Matches with "/api/recipes"
 router.route("/")
   .get(recipesController.findAll)
   .post(recipesController.create);
 
-// Matches with "/api/books/:id"
+// Matches with "/api/recipes/:id"
 router
   .route("/:id")
   .get(recipesController.findById)
   .put(recipesController.update)
   .delete(recipesController.remove);
-
-router
-  .get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "./client/build/index.html"));
-  });
 
 module.exports = router;

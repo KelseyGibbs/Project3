@@ -8,6 +8,14 @@ const keys = require("../../config/keys");
 const validateRegisterInput = require("../../validation/register");
 const validateLoginInput = require("../../validation/login");
 
+const usersController = require("../../controllers/usersController");
+
+// Matches with "/api/users"
+router.route("/")
+  .get(usersController.findAll)
+  .post(usersController.create);
+
+
 // Load User model/schema
 const User = require("../../models/Users");
 
@@ -31,7 +39,8 @@ router.post("/register", (req, res) => {
         name: req.body.name,
         email: req.body.email,
         password: req.body.password,
-        isAdmin: req.body.isAdmin
+        isAdmin: req.body.isAdmin,
+        cart: []
       });
 
       // Hash password using bcrypt then save the hashed password
@@ -49,6 +58,8 @@ router.post("/register", (req, res) => {
   });
 });
 
+
+  
 // Define API login route
 router.post("/login", (req, res) => {
   
@@ -64,6 +75,7 @@ router.post("/login", (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
   const isAdminn = req.body.isAdmin;
+  const cart = [];
 
   // Find the user that matches the user input
   User.findOne({ email }).then(user => {
@@ -80,7 +92,8 @@ router.post("/login", (req, res) => {
         const payload = {
           id: user.id,
           name: user.name,
-          isAdmin: user.isAdmin
+          isAdmin: user.isAdmin,
+          cart: user.cart
         };
 
         // Sign token

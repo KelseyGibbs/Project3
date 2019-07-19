@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { loginUser } from "../../actions/authActions";
 import classnames from "classnames";
+import stylesheet from "./Login.css";
 
 class Login extends Component {
   constructor() {
@@ -63,11 +64,18 @@ class Login extends Component {
   render() {
     const { errors } = this.state;
 
-    return (
-      <div className="container">
-        <div className="row">
 
+
+
+    return (
+      
+      <div className="container">
+      <div id="login">
+        <div className="row">
+        <div id="logintext">
             <div className="col s12">
+            <h2>Welcome to <b>Whole Baker</b></h2>
+            <p style={{padding: "3px"}}><i>"your wholesale bakery management application"</i></p>
               <h4>
                 <b>Login</b> below
               </h4>
@@ -86,7 +94,7 @@ class Login extends Component {
                   className={classnames("", {
                     invalid: errors.email || errors.emailnotfound
                   })}
-                />
+                  />
                 <label htmlFor="email">Email</label>
                 <span className="red-text">
                   {errors.email}
@@ -103,7 +111,7 @@ class Login extends Component {
                   className={classnames("", {
                     invalid: errors.password || errors.passwordincorrect
                   })}
-                />
+                  />
                 <label htmlFor="password">Password</label>
                 <span className="red-text">
                   {errors.password}
@@ -132,13 +140,15 @@ class Login extends Component {
                   }}
                   type="submit"
                   className="btn"
-                >
+                  >
                   Login
                 </button>
               </div>
             </form>
           </div>
         </div>
+                  </div>
+</div>
     );
   }
 }

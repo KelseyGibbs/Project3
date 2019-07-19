@@ -20,6 +20,15 @@ const UserSchema = new Schema({
     default: false,
     required: true
   },
+  cart: {
+    type: Array,
+    required: false
+  },
+  quantity: {
+    type: Number,
+    required: false,
+    default: 1
+  },
   date: {
     type: Date,
     default: Date.now

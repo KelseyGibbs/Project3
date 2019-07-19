@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
+import stylesheet from "./Dashboard";
 
 class Dashboard extends Component {
   onLogoutClick = e => {
@@ -14,12 +15,13 @@ class Dashboard extends Component {
 
     return (
       <div className="container">
+      
         <div className="row">
           <div className="col s12 center-align">
             <h4>
               <b>Hey there,</b> {user.name}
               <p className="flow-text grey-text text-darken-1">
-                You are logged into <b>WholeBaker</b>
+                Welcome to the the <b>WholeBaker</b> customer portal
               </p>
             </h4>
             <button
@@ -28,9 +30,28 @@ class Dashboard extends Component {
             >
               Logout
             </button>
+            
           </div>
         </div>
+        <div className="row space">
+
+<div className="col s6">
+  <div className="card-panel teal">
+    <span className="white-text">
+    <a href="/order"><h3>Place an Order</h3></a>
+    </span>
+  </div>
+</div>
+
+<div className="col s6">
+  <div className="card-panel teal">
+    <span className="white-text"> 
+    <a href="/userInfo"><h3>View your user info.</h3></a>
+    </span>
+  </div>
+</div>
       </div>
+    </div>
     );
   }
 }

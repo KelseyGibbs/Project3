@@ -18,10 +18,11 @@ class AdminDash extends Component {
         <div className="row">
           <div className="col s12 center-align">
             <h4>
-              <b>Hey there,</b> {user.name}
+              <b>Hey there,</b> {user.name}{user.isAdmin}{user.cart}
               <p className="flow-text grey-text text-darken-1">
                 You are logged into <b>WholeBaker</b> as an <b>Admin</b>
               </p>
+              console.log(user.cart);
             </h4>
             <button
               onClick={this.onLogoutClick}
@@ -31,32 +32,27 @@ class AdminDash extends Component {
             </button>
             
             <div className="row space">
-    <div className="col s4">
+
+    <div className="col s6">
       <div className="card-panel teal">
         <span className="white-text">
-        <a href="/register"><h3>Customers</h3></a>
+        <a href="/register"><h3>Sign up new Customers</h3></a>
         </span>
       </div>
     </div>
-    <div className="col s4">
+    
+    <div className="col s6">
       <div className="card-panel teal">
         <span className="white-text"> 
-        <a href="/allproducts"><h3>Products</h3></a>
+        <a href="/newproduct"><h3>Add a new product</h3></a>
         </span>
       </div>
     </div>
-    <div className="col s4">
-      <div className="card-panel teal">
-        <span className="white-text"> 
-        <a href="/Production"><h3>Production</h3></a>
-        </span>
-      </div>
-    </div>
-  </div>
-          
           </div>
         </div>
       </div>
+      </div>
+      
     );
   }
 }

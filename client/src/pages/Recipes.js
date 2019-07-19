@@ -1,15 +1,13 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { logoutUser } from "../../actions/authActions";
-import DeleteBtn from "../DeleteBtn";
-import API from "../../utils/API";
-import { List, ListItem, Card } from "../List";
-import { ReactComponent as Guinness } from "../../Images/Guinness.png"
-import { Input, TextArea, FormBtn } from "../Form";
+import { logoutUser } from "../actions/authActions";
+import DeleteBtn from "../components/DeleteBtn";
+import API from "../utils/API";
+import { List, ListItem, Card } from "../components/List";
+import { Input, TextArea, FormBtn } from "../components/Form";
 
-class NewProduct extends Component {
-
+class Recipes extends Component {
   onLogoutClick = e => {
     e.preventDefault();
     this.props.logoutUser();
@@ -20,7 +18,6 @@ class NewProduct extends Component {
     recipes: [],
     title: "",
     price: "",
-    inventory: "",
     description: ""
   };
 
@@ -33,7 +30,7 @@ class NewProduct extends Component {
   loadRecipes = () => {
     API.getRecipes()
       .then(res =>
-        this.setState({ recipes: res.data, title: "", price: "", description: "", inventory: "" })
+        this.setState({ recipes: res.data, title: "", price: "", description: "" })
       )
       .catch(err => console.log(err));
   };
@@ -61,8 +58,7 @@ class NewProduct extends Component {
       API.saveRecipe({
         title: this.state.title,
         price: this.state.price,
-        description: this.state.description,
-        inventory: this.state.inventory
+        description: this.state.description
       })
         .then(res => this.loadRecipes())
         .catch(err => console.log(err));
@@ -75,32 +71,38 @@ class NewProduct extends Component {
       <div className="container">
       <div className="row">
       <div className="col s12">
-      <h1><b>new</b> Order</h1>
-
+        <form>
+          <Input value={this.state.title} onChange={this.handleInputChange} name="title" placeholder="Title (required)" />
+          <Input value={this.state.price} onChange={this.handleInputChange} name="price" placeholder="Price (required)" />
+          <TextArea value={this.state.description} onChange={this.handleInputChange} name="description" placeholder="Description (Optional)" />
+          <FormBtn
+                  disabled={!(this.state.price && this.state.description)}
+                  onClick={this.handleFormSubmit}
+                  >
+                  Submit Recipe
+                </FormBtn>
+              </form>
             </div>
           </div>
-          <div className="row">
+            <div className="col 3">
               {this.state.recipes.length ? (
                 <List>
                   {this.state.recipes.map(recipe => {
                     return (
                       <ListItem key={recipe._id}>
-                        <div class="row">
-    <div class="col s12 m7">
-      <div class="card">
-        <div class="card-image">
-          <img src={Guinness}></img>
-        </div>
-        <div class="card-content">
-          <p>I am a very simple card. I am good at containing small bits of information.
-          I am convenient because I require little markup to use effectively.</p>
-        </div>
-        <div class="card-action">
-          <a href="#">This is a link</a>
-        </div>
-      </div>
-    </div>
-  </div>
+                        <div className="card">
+                              <div className="card-image waves-effect waves-block waves-light">
+                              </div>
+                              <div className="card-content">
+                              <span className="card-title activator grey-text text-darken-4">{recipe.title}<i className="material-icons right">more_vert</i></span>
+                                <p><a href={"/recipes/" + recipe._id}>This is a link</a></p>
+                                </div>
+                              <div className="card-reveal">
+                             <span className="card-title grey-text text-darken-4">Card Title<i className="material-icons right">close</i></span>
+                          <p>{recipe.description}</p>
+                      </div>
+                    </div>
+                  
                       </ListItem>
                     );
                   })}
@@ -108,8 +110,7 @@ class NewProduct extends Component {
               ) : (
                 <h3>No Results to Display</h3>
                 )}
-            
-                </div>
+            </div>
             <button
               onClick={this.onLogoutClick}
               className="btn"
@@ -120,8 +121,7 @@ class NewProduct extends Component {
       );
     }
   }
-
-  NewProduct.propTypes = {
+  Recipes.propTypes = {
     logoutUser: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired
   };
@@ -133,4 +133,4 @@ class NewProduct extends Component {
   export default connect(
     mapStateToProps,
     { logoutUser }
-  )(NewProduct);
+  )(Recipes);
