@@ -5,8 +5,9 @@ import { logoutUser } from "../../actions/authActions";
 import DeleteBtn from "../DeleteBtn";
 import API from "../../utils/API";
 import { List, ListItem, Card } from "../List";
-import { ReactComponent as Guinness } from "../../Images/Guinness.png"
+import Guinness from "../Images/Guinness.jpeg"
 import { Input, TextArea, FormBtn } from "../Form";
+import stylesheet from "./Order.css"
 
 class NewProduct extends Component {
 
@@ -21,7 +22,8 @@ class NewProduct extends Component {
     title: "",
     price: "",
     inventory: "",
-    description: ""
+    description: "",
+    inputValue: ''
   };
 
   // When the component mounts, load all recipes and save them to this.state.recipes
@@ -45,13 +47,28 @@ class NewProduct extends Component {
       .catch(err => console.log(err));
   };
 
+
   // Handles updating component state when the user types into the input field
-  handleInputChange = event => {
-    const { name, value } = event.target;
+  updateInput=(newInputValue) => {
     this.setState({
-      [name]: value
-    });
+      inputValue: newInputValue
+    }) 
+      console.log(this.state.inputValue);
+
+  
   };
+
+  quantityInput = () =>{
+      return <Input value={this.inputValue}
+      onChange={this.updateInput}/>
+  };
+  // submit = () => {
+  //   // Need to loop over inputs and get values for all of them.
+  //   this.state.inputs.map((input) => {
+  //     const node = ReactDOM.findDOMNode(this.refs[input.id]);
+  //     // do what you want to do with `node`
+  //   })
+  // };
 
   // When the form is submitted, use the API.saveRecipe method to save the recipe data
   // Then reload recipes from the database
@@ -85,22 +102,32 @@ class NewProduct extends Component {
                   {this.state.recipes.map(recipe => {
                     return (
                       <ListItem key={recipe._id}>
-                        <div class="row">
-    <div class="col s12 m7">
+    <div class="col s3 m3 l3">
       <div class="card">
         <div class="card-image">
           <img src={Guinness}></img>
         </div>
         <div class="card-content">
-          <p>I am a very simple card. I am good at containing small bits of information.
-          I am convenient because I require little markup to use effectively.</p>
+        <h4>{recipe.title}</h4>
+          <p>{recipe.description}</p>
+          <h6>Price {recipe.price}$</h6>
         </div>
         <div class="card-action">
-          <a href="#">This is a link</a>
+<form>
+{/* <Input 
+defaultValue={this.state.inputValue} 
+name="quantity"
+value={this.state.inputValue} 
+onChange={this.updateInputValue.bind(this)}/> */}
+<div style={{height: '40px', width: '100%'}}>
+{this.quantityInput()}
+</div>
+</form>
+</div>
+
+
         </div>
       </div>
-    </div>
-  </div>
                       </ListItem>
                     );
                   })}
