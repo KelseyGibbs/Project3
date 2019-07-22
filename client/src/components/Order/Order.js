@@ -23,7 +23,7 @@ class NewProduct extends Component {
     price: "",
     inventory: "",
     description: "",
-    inputValue: ''
+    inputValue: []
   };
 
   // When the component mounts, load all recipes and save them to this.state.recipes
@@ -49,26 +49,21 @@ class NewProduct extends Component {
 
 
   // Handles updating component state when the user types into the input field
-  updateInput=(newInputValue) => {
+  updateInput=(event) => {
     this.setState({
-      inputValue: newInputValue
+      inputValue: event.target.value
     }) 
-      console.log(this.state.inputValue);
+      console.log(this.inputValue);
 
-  
   };
 
   quantityInput = () =>{
-      return <Input value={this.inputValue}
+      return <Input 
+      name={this.inputValue}
+      value={this.inputValue}
       onChange={this.updateInput}/>
   };
-  // submit = () => {
-  //   // Need to loop over inputs and get values for all of them.
-  //   this.state.inputs.map((input) => {
-  //     const node = ReactDOM.findDOMNode(this.refs[input.id]);
-  //     // do what you want to do with `node`
-  //   })
-  // };
+  
 
   // When the form is submitted, use the API.saveRecipe method to save the recipe data
   // Then reload recipes from the database

@@ -15,6 +15,7 @@ import Dashboard from "./components/dashboard/Dashboard";
 import AdminDash from "./components/AdminDash/AdminDash";
 import Order from "./components/Order/Order";
 import NewProduct from "./components/Products/NewProduct";
+import CartPage from "./pages/CartPage";
 
 import Recipes from "./pages/Recipes";
 
@@ -55,7 +56,7 @@ class App extends Component {
             <PrivateRouteAdmin exact path="/dashboard" component={Dashboard} />
             <PrivateRouteAdmin exact path="/order" component={Order} />
 
-
+            <PrivateRoute exact path="/cart" component={CartPage} />
             <PrivateRoute exact path="/admindash" component={AdminDash} />
             <PrivateRoute exact path="/recipes" component={Recipes} />
             <PrivateRoute exact path="/newproduct" component={NewProduct} />
